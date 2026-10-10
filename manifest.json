@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Page Inspector",
+  "version": "0.3.0",
+  "description": "识别页面中的表单组件、可选值、按钮和表格字段（侧边栏版）",
+  "permissions": ["activeTab", "scripting", "sidePanel"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "Page Inspector" },
+  "side_panel": { "default_path": "sidepanel.html" }
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  *{box-sizing:border-box}
+  body{font:13px/1.55 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;padding:10px;color:#222}
+  h1{font-size:14px;margin:0 0 8px}
+  .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+  button{padding:4px 10px;cursor:pointer;border:1px solid #ccc;border-radius:6px;background:#fff}
+  button.primary{background:#1677ff;color:#fff;border-color:#1677ff}
+  button:disabled{opacity:.5;cursor:default}
+  label.opt{display:inline-flex;gap:4px;align-items:center;font-size:12px}
+  select,input[type=number],input[type=text]{padding:3px 6px;border:1px solid #ccc;border-radius:6px;font-size:12px}
+  #filter{flex:1;min-width:120px}
+  #summary{color:#555;font-size:12px;margin:6px 0}
+  #views{display:flex;gap:4px;margin:8px 0}
+  #views button.on{background:#e6f4ff;border-color:#1677ff;color:#1677ff}
+  pre{background:#f6f8fa;padding:8px;border-radius:8px;max-height:60vh;overflow:auto;white-space:pre-wrap;word-break:break-all;font-size:12px}
+  table.mini{width:100%;border-collapse:collapse;font-size:12px}
+  table.mini th,table.mini td{border:1px solid #e5e5e5;padding:3px 6px;text-align:left;vertical-align:top}
+  table.mini th{background:#fafafa}
+  .sec{font-weight:700;margin:10px 0 4px}
+  .muted{color:#888;font-size:12px}
+  #overview{max-height:62vh;overflow:auto}
+</style></head>
+<body>
+  <h1>🔍 Page Inspector <span class="muted">侧边栏版</span></h1>
+  <div class="row">
+    <button id="scan" class="primary">重新扫描</button>
+    <label class="opt"><input type="checkbox" id="optExpand" checked>下拉/级联展开</label>
+    <label class="opt"><input type="checkbox" id="optTabs" checked>Tab遍历</label>
+    <label class="opt"><input type="checkbox" id="optRows" checked>表格数据</label>
+    <label class="opt">行数<input type="number" id="optLimit" value="20" min="1" max="100" style="width:52px"></label>
+  </div>
+  <div class="row">
+    <label class="opt"><input type="checkbox" id="optAuto">自动刷新</label>
+    <select id="optInterval"><option value="2000">2s</option><option value="5000" selected>5s</option><option value="10000">10s</option></select>
+    <label class="opt"><input type="checkbox" id="optVisible" checked>仅看可见</label>
+    <label class="opt"><input type="checkbox" id="optHideNav" checked>隐藏导航/空按钮</label>
+  </div>
+  <div class="row">
+    <input type="text" id="filter" placeholder="过滤 label / name / 文本…">
+  </div>
+  <div class="row">
+    <button id="cpJson">复制JSON</button><button id="dlJson">下载JSON</button>
+    <button id="cpMd">复制MD</button><button id="dlMd">下载MD</button>
+    <button id="cpSchema">复制Schema</button><button id="dlSchema">下载Schema</button>
+  </div>
+  <div id="summary">就绪</div>
+  <div id="views">
+    <button data-v="overview" class="on">概览</button>
+    <button data-v="json">JSON</button>
+    <button data-v="md">Markdown</button>
+    <button data-v="schema">JSON Schema</button>
+  </div>
+  <div id="overview"></div>
+  <pre id="out" hidden></pre>
+  <script src="sidepanel.js"></script>
+</body></html>
